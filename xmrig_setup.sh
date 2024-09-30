@@ -1,26 +1,30 @@
 #!/bin/bash
 
-# Update and upgrade system
-sudo apt update && sudo apt upgrade -y
+# Elevate privileges
+sudo su
 
-# Install necessary dependencies
-sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
+# Update the system
+apt-get update -y
+apt-get upgrade -y
 
-# Clone XMRig repository from GitHub
+# Install dependencies
+apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
+
+# Clone the XMRig miner repository
 git clone https://github.com/xmrig/xmrig.git
 
-# Change to XMRig directory
+# Change directory to xmrig
 cd xmrig
 
-# Create a build directory
+# Create build directory and navigate to it
 mkdir build
 cd build
 
 # Build XMRig
 cmake ..
-make -j$(nproc)
+make
 
-# Create the config.json file
+# Setup config file for Monero mining with pools
 cat << EOF > config.json
 {
     "api": {
@@ -197,6 +201,5 @@ cat << EOF > config.json
 }
 EOF
 
-# Start mining
-cd build
-./xmrig
+# Run XMRig
+./xmrig -c config.json
