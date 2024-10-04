@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Elevate privileges
-sudo su
+
 
 # Update the system
 apt-get update -y
