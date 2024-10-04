@@ -1,6 +1,3 @@
-Here is a **README.md** file for your repository with the commands to set up the miner:
-
----
 
 ## XMRig Miner Setup
 
